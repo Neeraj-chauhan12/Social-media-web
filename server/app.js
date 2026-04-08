@@ -12,8 +12,8 @@ const path = require("path");
 
 app.use(
   cors({
-    origin: "https://food-app-1-8ys2.onrender.com",
-
+    //origin: "https://food-app-1-8ys2.onrender.com",
+    origin: "http://localhost:5173",
     credentials: true,
     methods: ["GET", "POST", "UPDATE", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],

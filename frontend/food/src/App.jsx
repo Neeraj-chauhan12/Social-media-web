@@ -25,51 +25,30 @@ const isAuthenticatedPartner = () => {
 };
 
 // Protect routes that require authentication
-function PrivateRoute({ children }) {
-  return isAuthenticated() ? (
-    children
-  ) : <Navigate to="/user/login" replace /> 
 
-}
-
-function PartnerRoute({ children }) {
-  return isAuthenticatedPartner() ? (
-    children
-  ) : <Navigate to="/partner/login" replace />;
-}
-
-// Redirect authenticated users away from login/register pages
-function PublicRoute({ children }) {
-  return isAuthenticated() ? <Navigate to="/" replace /> : children;
-}
-
-// Redirect authenticated partner away from login/register pages
-function PublicPartnerRoute({ children }) {
-  return isAuthenticatedPartner() ? <Navigate to="/" replace /> : children;
-}
 
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
         {/* User Auth Routes */}
-        <Route path="/user/register" element={<PublicRoute><UserRegister /></PublicRoute>} />
-        <Route path="/user/login" element={<PublicRoute><UserLogin /></PublicRoute>} />
+        <Route path="/user/register" element={<UserRegister />} />
+        <Route path="/user/login" element={<UserLogin />} />
 
         {/* Partner Auth Routes */}
-        <Route path="/partner/register" element={<PublicPartnerRoute><FoodPartnerRegister /></PublicPartnerRoute>} />
-        <Route path="/partner/login" element={<PublicPartnerRoute><FoodPartnerLogin /></PublicPartnerRoute>} />
+        <Route path="/partner/register" element={<FoodPartnerRegister />} />
+        <Route path="/partner/login" element={<FoodPartnerLogin />} />
 
         {/* User Protected Routes */}
-        <Route path="/" element={<PrivateRoute><Home /></PrivateRoute>} />
-        <Route path="/profile/:id" element={<PrivateRoute><Profile /></PrivateRoute>} />
-        <Route path="/user/profile" element={<PrivateRoute><UserProfile /></PrivateRoute>} />
-        <Route path="/save" element={<PrivateRoute><SavedReel /></PrivateRoute>} />
+        <Route path="/" element={<Home />} />
+        <Route path="/profile/:id" element={<Profile />} />
+        <Route path="/user/profile" element={<UserProfile />} />
+        <Route path="/save" element={<SavedReel />} />
 
         {/* Partner Protected Routes */}
-        <Route path="/create-food" element={<PartnerRoute><CreateReel /></PartnerRoute>} />
-        <Route path="/partner/profile" element={<PartnerRoute><PartnerProfile /></PartnerRoute>} />
-        <Route path="/partner/profile/:id" element={<PartnerRoute><PartnerProfile /></PartnerRoute>} />
+        <Route path="/create-food" element={<CreateReel />} />
+        <Route path="/partner/profile" element={<PartnerProfile />} />
+        <Route path="/partner/profile/:id" element={<PartnerProfile />} />
       </Routes>
       <Toaster />
     </BrowserRouter>

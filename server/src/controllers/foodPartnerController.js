@@ -1,7 +1,7 @@
 const foodPartnerModel = require("../model/foodPartnermodel");
 
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken")
 const foodModel = require("../model/foodModel");
 
 exports.foodPartnerRegister = async (req, res) => {
