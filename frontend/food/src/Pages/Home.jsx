@@ -9,6 +9,10 @@ const Home = () => {
 
   const [videos, setVideos] = useState([]);
 
+  if (!localStorage.getItem("user") && !localStorage.getItem("partner")) {
+    window.location.href = "/user/login";
+  }
+
   useEffect(()=>{
   axios.get(`${BACKEND_URL}/api/auth/food/data`,{
     withCredentials:true

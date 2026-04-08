@@ -25,7 +25,10 @@ const isAuthenticatedPartner = () => {
 };
 
 // Protect routes that require authentication
-
+if (!isAuthenticated() && !isAuthenticatedPartner()) {
+  // If user is not authenticated, redirect to login page
+  window.location.href = "/user/login";
+}
 
 const App = () => {
   return (
