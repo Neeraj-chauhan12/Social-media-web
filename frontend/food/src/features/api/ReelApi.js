@@ -35,7 +35,7 @@ export const reelApi = createApi({
 
     GetSaveReels: builder.query({
       query: () => ({
-        url: "/saved",
+        url: "/save",
         method: "GET",
       }),
     }),
@@ -53,4 +53,4 @@ export const reelApi = createApi({
   })
 });
 
-export const { useGetReelsQuery, useCreateReelMutation,useSaveReelsMutation,useGetSaveReelsQuery,useLikeReelMutation } = reelApi;
+export const { useGetReelsQuery,useLikeReelsMutation, useCreateReelMutation,useSaveReelsMutation,useGetSaveReelsQuery, } = reelApi;

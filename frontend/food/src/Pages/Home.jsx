@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import ReelsPart from '../components/ReelsPart';
-import { useGetReelsQuery, useGetSaveReelsQuery, useLikeReelMutation, useSaveReelsMutation } from '../features/api/ReelApi';
+import { useGetReelsQuery, useGetSaveReelsQuery, useLikeReelsMutation, useSaveReelsMutation } from '../features/api/ReelApi';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
@@ -15,7 +15,7 @@ const Home = () => {
   const [videos, setVideos] = useState([]);
 
   const { data, isLoading, isError } = useGetReelsQuery();
-  const [likeReels] = useLikeReelMutation();
+  const [likeReels] = useLikeReelsMutation();
   const [saveReels] = useSaveReelsMutation();
   const { data: savedReels } = useGetSaveReelsQuery();
  

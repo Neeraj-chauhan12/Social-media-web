@@ -10,11 +10,8 @@ const ReelsPart = ({
   videos = [],
   onLike,
   onSave,
-  isloading,
   emptyMessage = "no yet reel",
 }) => {
-  const navigate = useNavigate();
-
   console.log("vedeos in reels part:", videos);
 
   const videoRefs = useRef(new Map());

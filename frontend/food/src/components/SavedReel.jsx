@@ -2,12 +2,29 @@ import React, { useEffect, useState } from 'react'
 import ReelsPart from './ReelsPart';
 import axios from 'axios';
 
-import { useSaveReelsMutation } from '../features/api/ReelApi';
+import { useGetSaveReelsQuery, useSaveReelsMutation } from '../features/api/ReelApi';
 import toast from 'react-hot-toast';
 
 const SavedReel = () => {
     const [videos, setVideos] = useState([]);
     const [saveReels, { isLoading }] = useSaveReelsMutation();
+    const { data: savedReels } = useGetSaveReelsQuery();
+
+
+    console.log("Saved reels data:", savedReels);
+    useEffect(() => {
+        if (savedReels && savedReels.savedReels) {
+            const formattedReels = savedReels.savedReels.map((item) => ({
+                _id: item.reel._id,
+                video: item.reel.video,
+                description: item.reel.description,
+                likeCount: item.reel.likeCount,
+                saveCount: item.reel.saveCount,
+                user: item.reel.user,
+            }));
+            setVideos(formattedReels);
+        }
+    }, [savedReels]);
 
    
 
@@ -15,16 +32,16 @@ const SavedReel = () => {
     try {
     const res=saveReels().unwrap();
     console.log("Saved reels response:", res);
-    const savedFoods = res?.savedReels?.map((item) => ({
+    const savedReels = res?.savedReels?.map((item) => ({
         _id: item.reel._id,
         video: item.reel.video,
         description: item.reel.description,
         likeCount: item.reel.likeCount,
         saveCount: item.reel.saveCount,
         user: item.reel.user,
-    })) || [];
+    }));
       
-    setVideos(savedFoods);
+    setVideos(savedReels);
         
     } catch (error) {
         console.error("Error fetching saved reels:", error);
@@ -34,16 +51,7 @@ const SavedReel = () => {
 
 
 
-      // const savedFoods = response.data.savedFoods.map((item) => ({
-            //         _id: item.food._id,
-            //         video: item.food.video,
-            //         description: item.food.description,
-            //         likeCount: item.food.likeCount,
-            //         saveCount: item.food.saveCount,
-            //         foodPartner: item.food.foodPartner,
-            //     }))
-              
-            //     setVideos(savedFoods);
+   
     // const removeSaved = async (item) => {
     //     try {
     //         await axios.post(`${BACKEND_URL}/api/auth/food/save`, { foodId: item._id }, { withCredentials: true })
@@ -55,7 +63,7 @@ const SavedReel = () => {
 
 
   return (
-    <ReelsPart videos={videos}  emptyMessage="No Saved Reels Yet!"  />
+    <ReelsPart videos={videos}   emptyMessage="No Saved Reels Yet!"  />
   )
 }
 
