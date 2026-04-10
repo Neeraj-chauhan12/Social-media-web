@@ -1,7 +1,7 @@
 const mongoose=require('mongoose')
 
 
-const foodSchema= new mongoose.Schema({
+const reelSchema= new mongoose.Schema({
     name:{
         type:String,
         required:true
@@ -15,9 +15,9 @@ const foodSchema= new mongoose.Schema({
         required:true,
     },
 
-    foodPartner:{
+    userId:{
      type:mongoose.Schema.Types.ObjectId,
-     ref:"foodPartner"
+     ref:"User"
     },
     likeCount:{
         type:Number,
@@ -29,4 +29,4 @@ const foodSchema= new mongoose.Schema({
     }
 })
 
-module.exports=mongoose.model("food",foodSchema)
+module.exports=mongoose.model("Reel",reelSchema)

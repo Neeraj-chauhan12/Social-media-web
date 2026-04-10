@@ -7,19 +7,9 @@ const BottomNavigation = () => {
   const navigate = useNavigate()
 
   const handleProfileClick = () => {
-    const partner = (() => { try { return JSON.parse(localStorage.getItem('partner')) } catch (e) { return null } })()
-    const user = (() => { try { return JSON.parse(localStorage.getItem('user')) } catch (e) { return null } })()
-
-    if (partner) {
-      navigate(`/partner/profile/${partner._id}`)
-      return
-    }
-    if (user) {
-      navigate('/user/profile')
-      return
-    }
-
-    navigate('/user/login')
+   
+    navigate('/profile');
+ 
   }
 
   return (

@@ -6,9 +6,9 @@ const likesSchema = new mongoose.Schema({
         ref:'user',
         required: true
     },
-    food: {
+    reel: {
         type: mongoose.Schema.Types.ObjectId,
-        ref:'food',
+        ref:'Reel',
         required: true
     }
 }, { timestamps: true });

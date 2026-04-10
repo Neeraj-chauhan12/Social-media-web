@@ -18,25 +18,7 @@ const PartnerProfile = () => {
   }
 
   useEffect(() => {
-    const fetchPartnerData = async () => {
-      try {
-        const response = await axios.get(`${BACKEND_URL}/api/auth/partner/${id}`, {
-          withCredentials: true
-        })
-       
-        setPartner(response.data.foodPartner)
-        setVideos(response.data.foodPartner.foodItems || [])
-       
-      } catch (err) {
-        console.log(err)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    if (id) {
-      fetchPartnerData()
-    }
+   
   }, [id])
 
   if (loading) {

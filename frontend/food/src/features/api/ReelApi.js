@@ -25,9 +25,32 @@ export const reelApi = createApi({
     }),
 
 
+    SaveReels: builder.mutation({
+      query:(reelId)=>({
+        url:"/save",
+        method:"POST",
+        body:{reelId}
+      })
+    }),
+
+    GetSaveReels: builder.query({
+      query: () => ({
+        url: "/saved",
+        method: "GET",
+      }),
+    }),
+
+    LikeReels: builder.mutation({
+      query:(reelId)=>({
+        url:"/like",
+        method:"POST",
+        body:{reelId}
+      })
+    }),
+
 
 
   })
 });
 
-export const { useGetReelsQuery, useCreateReelMutation } = reelApi;
+export const { useGetReelsQuery, useCreateReelMutation,useSaveReelsMutation,useGetSaveReelsQuery,useLikeReelMutation } = reelApi;

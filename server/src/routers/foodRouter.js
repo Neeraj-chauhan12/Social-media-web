@@ -1,5 +1,5 @@
 const express = require('express')
-const { createFood, getFoodData, likedFood, getSaveFood, savedFood } = require('../controllers/foodControllers')
+const {getReelData, createReel, likedReel, savedReel, getSaveReels } = require('../controllers/foodControllers')
 const router=express.Router()
 const multer=require('multer')
 const userAuthMiddleware = require('../middlewares/userAuthMiddleware')
@@ -8,11 +8,11 @@ const upload=multer({
     storage:multer.memoryStorage(),
 })
 
-router.post('/create',userAuthMiddleware,upload.single("video"),createFood)
-router.get("/data",userAuthMiddleware,getFoodData)
-router.post("/like",userAuthMiddleware,likedFood)
-router.post("/save",userAuthMiddleware,savedFood)
-router.get("/save",userAuthMiddleware,getSaveFood);
+router.post('/create',userAuthMiddleware,upload.single("video"),createReel)
+router.get("/data",userAuthMiddleware,getReelData)
+router.post("/like",userAuthMiddleware,likedReel)
+router.post("/save",userAuthMiddleware,savedReel)
+router.get("/save",userAuthMiddleware,getSaveReels);
 
 
 module.exports = router
