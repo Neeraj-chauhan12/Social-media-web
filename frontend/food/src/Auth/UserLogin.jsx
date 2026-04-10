@@ -43,8 +43,8 @@ const UserLogin = () => {
           <button type="submit" className="w-full py-2 rounded bg-blue-600 text-white dark:bg-blue-500 dark:text-white font-semibold hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors">Login</button>
         </form>
         <div className="flex flex-col gap-2 mt-6 text-center">
-          <Link to="/user/register" className="text-blue-600 dark:text-blue-400 hover:underline">Don't have an account? Register</Link>
-          <Link to="/partner/register" className="text-blue-600 dark:text-blue-400 hover:underline">Register as Food Partner</Link>
+          <Link to="/register" className="text-blue-600 dark:text-blue-400 hover:underline">Don't have an account? Register</Link>
+         
  </div>
       </div>
     </div>

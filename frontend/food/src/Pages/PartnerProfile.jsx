@@ -14,7 +14,7 @@ const PartnerProfile = () => {
   const handleLogout=()=>{
     localStorage.removeItem("partner");
     toast.success("Logged out successfully");
-    navigate("/partner/login");
+    navigate("/login");
   }
 
   useEffect(() => {

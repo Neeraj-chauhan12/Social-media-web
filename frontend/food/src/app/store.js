@@ -1,13 +1,14 @@
 import { configureStore}from '@reduxjs/toolkit';
 import { rootReducer } from './rootReducer';
-import { AuthApi } from '../features/api/AuthApi';
+import { authApi } from '../features/api/AuthApi';
+;
 
 export const AppStore=configureStore({
-    reducer:{rootReducer},
-    middleware:(defaultMiddleware)=>defaultMiddleware().concat(AuthApi.middleware),
+    reducer:rootReducer,
+    middleware:(getDefaultMiddleware)=>getDefaultMiddleware().concat(authApi.middleware),
 })
 
 const initializeApp=async()=>{
-    await AppStore.dispatch(AuthApi.endpoints.getProfile.initiate());
+    await AppStore.dispatch(authApi.endpoints.getProfile.initiate({},{forceRefetch:true}));
 }
 initializeApp();

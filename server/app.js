@@ -26,7 +26,7 @@ app.use(cookieParser());
 const _dirname = path.resolve();
 
 app.use("/api/auth", userRouter);
-app.use("/api/auth/food", foodRouter);
+app.use("/api/auth/reel", foodRouter);
 
 app.use(express.static(path.join(_dirname, "/frontend/food/dist")));
 app.use((req, res) => {

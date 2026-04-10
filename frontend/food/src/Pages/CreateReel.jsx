@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { useCreateReelMutation } from '../features/api/ReelApi';
 
 
 
@@ -10,6 +11,8 @@ const CreateReel = () => {
   const [videoUrl, setVideoUrl] = useState(null);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
+
+  const [createReel, { isLoading }] = useCreateReelMutation();
 
   const navigate = useNavigate();
 
@@ -24,8 +27,6 @@ const CreateReel = () => {
     }
   };
 
-  const partner=JSON.parse(localStorage.getItem("partner"));
-  console.log(partner._id);
 
   const handleSubmit =async (e) => {
     e.preventDefault();
@@ -34,6 +35,19 @@ const CreateReel = () => {
     formData.append('video', videoFile);
     formData.append('name', name);
     formData.append('description', description);
+
+    try {
+      const response = await createReel(formData).unwrap();
+      console.log("Reel created successfully:", response);
+      toast.success(response?.message || "Reel uploaded successfully!");
+      navigate('/');
+      
+    } catch (error) {
+      console.error("Error uploading reel:", error);
+      toast.error("Failed to upload reel. Please try again.");
+      return;
+      
+    }
 
   
       // Reset form 

@@ -1,10 +1,13 @@
 import {combineReducers} from '@reduxjs/toolkit';
-import { AuthApi } from '../features/api/AuthApi';
+
 import authReducer from '../features/AuthSlice';
+import { authApi } from '../features/api/AuthApi';
+import { reelApi } from '../features/api/ReelApi';
 
 
 export const rootReducer=combineReducers({
     // Add your reducers here
-    [AuthApi.reducerPath]:AuthApi.reducer,
+    [authApi.reducerPath]:authApi.reducer,
+    [reelApi.reducerPath]:reelApi.reducer,
     auth:authReducer
 })

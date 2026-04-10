@@ -8,7 +8,7 @@ const upload=multer({
     storage:multer.memoryStorage(),
 })
 
-router.post('/',userAuthMiddleware,upload.single("video"),createFood)
+router.post('/create',userAuthMiddleware,upload.single("video"),createFood)
 router.get("/data",userAuthMiddleware,getFoodData)
 router.post("/like",userAuthMiddleware,likedFood)
 router.post("/save",userAuthMiddleware,savedFood)

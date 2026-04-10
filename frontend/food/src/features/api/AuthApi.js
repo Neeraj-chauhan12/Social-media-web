@@ -3,13 +3,13 @@ import { UserLogin } from "../AuthSlice";
 
 const baseUrl = "http://localhost:3000/api/auth";
 
-export const AuthApi = createApi({
-  reducerPath: "AuthApi",
+export const authApi = createApi({
+  reducerPath: "authApi",
   baseQuery: fetchBaseQuery({ baseUrl, credentials: "include" }),
   endpoints: (builder) => ({
     login: builder.mutation({
       query: (inputData) => ({
-        url: "/user/login",
+        url: "/login",
         method: "POST",
         body: inputData,
       }),
@@ -25,27 +25,40 @@ export const AuthApi = createApi({
       },
     }),
 
-    register:builder.mutation({
-        query:(inputData)=>({
-            url:"/user/register",
-            method:"POST",
-            body:inputData
-        })
+    register: builder.mutation({
+      query: (inputData) => ({
+        url: "/register",
+        method: "POST",
+        body: inputData,
+      }),
+    }),
 
+    getProfile: builder.query({
+      query: () => ({
+        url: "/profile",
+        method: "GET",
+      }),
+    }),
+
+    logout: builder.mutation({
+      query: () => ({
+        url: "/logout",
+        method: "GET",
+      }),
     }),
 
 
-    getProfile:builder.query({
-        query:()=>({
-            url:"/user/profile",
-            method:"GET"
-        })
-    })
+
+    
 
 
 
   }),
 });
 
-
-export const { useLoginMutation, useRegisterMutation, useGetProfileQuery } = AuthApi;
+export const {
+  useLoginMutation,
+  useRegisterMutation,
+  useGetProfileQuery,
+  useLogoutMutation,
+} = authApi;

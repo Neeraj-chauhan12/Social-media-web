@@ -9,9 +9,7 @@ const Home = () => {
 
   const [videos, setVideos] = useState([]);
 
-  if (!localStorage.getItem("user") && !localStorage.getItem("partner")) {
-    window.location.href = "/user/login";
-  }
+  
 
 
 

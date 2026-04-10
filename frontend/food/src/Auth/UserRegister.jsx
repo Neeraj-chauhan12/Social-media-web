@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { useRegisterMutation } from '../features/api/AuthApi';
 
 
 const UserRegister = () => {
@@ -10,6 +11,8 @@ const UserRegister = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
+  const [register, { isLoading }] = useRegisterMutation();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setFullName("")
@@ -17,6 +20,17 @@ const UserRegister = () => {
     setPassword("")
     // Replace with API call
     
+    try {
+      const result = await register({ fullName, email, password }).unwrap();
+      toast.success(result?.message || "Registration successful!");
+      navigate("/login");
+      setFullName("")
+      setEmail("")
+      setPassword("")
+    } catch (error) {
+      toast.error(error?.data?.message || "Registration failed. Please try again.");
+      
+    }
     
 
   
@@ -35,8 +49,8 @@ const UserRegister = () => {
           <button type="submit" className="w-full py-2 rounded bg-blue-600 text-white dark:bg-blue-500 dark:text-white font-semibold hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors">Register</button>
         </form>
         <div className="flex flex-col gap-2 mt-6 text-center">
-          <Link to="/user/login" className="text-blue-600 dark:text-blue-400 hover:underline">Already have an account? Login</Link>
-          <Link to="/partner/register" className="text-blue-600 dark:text-blue-400 hover:underline">Register as Food Partner</Link>
+          <Link to="/login" className="text-blue-600 dark:text-blue-400 hover:underline">Already have an account? Login</Link>
+          
      </div>
       </div>
     </div>

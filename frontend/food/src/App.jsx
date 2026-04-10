@@ -4,21 +4,21 @@ import UserRegister from "./Auth/UserRegister";
 import UserLogin from "./Auth/UserLogin";
 
 import { Toaster } from "react-hot-toast";
-
+import Home from "./Pages/Home";
+import CreateReel from "./Pages/CreateReel";
 
 // Check if user has authentication token
-
 
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        {/* User Auth Routes */}
-        <Route path="/user/register" element={<UserRegister />} />
-        <Route path="/user/login" element={<UserLogin />} />
+        <Route path="/register" element={<UserRegister />} />
 
-    
+        <Route path="/login" element={<UserLogin />} />
+        <Route path="/" element={<Home />} />
 
+        <Route path="/create-reel" element={<CreateReel />} />
       </Routes>
       <Toaster />
     </BrowserRouter>

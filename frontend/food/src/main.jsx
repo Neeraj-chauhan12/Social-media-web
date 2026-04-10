@@ -12,7 +12,8 @@ const Custom = ({ children }) => {
   if (isLoading) {
     return (
       <div className="w-screen h-screen flex justify-center items-center">
-        <progress className="progress w-72"></progress>
+       
+       Loading....
       </div>
     );
   }

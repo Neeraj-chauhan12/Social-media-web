@@ -10,6 +10,8 @@ import BottomNavigation from '../components/BottomNavigation';
 const Profile = () => {
   const {id} = useParams();
 
+  const []=
+
   const [profileId, setProfileId] =useState(null);
   const [vedios,setVedios]=useState([])
 
