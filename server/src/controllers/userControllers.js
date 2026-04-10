@@ -75,3 +75,14 @@ exports.UserLogout=async(req,res)=>{
     }
 
 }
+
+exports.UserProfile=async(req,res)=>{
+    try {
+        const user=await UserModel.findById(req.user.id).select("-password")
+        res.status(200).json({message:"user profile",user})
+    } catch (error) {
+        res.status(500).json({error:"error in user profile page"})
+        console.log(error)
+        
+    }
+}
