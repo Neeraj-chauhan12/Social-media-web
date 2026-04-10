@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
-import { BACKEND_URL } from '../utiles/utiles';
+
 
 
 const CreateReel = () => {
@@ -35,22 +35,7 @@ const CreateReel = () => {
     formData.append('name', name);
     formData.append('description', description);
 
-    await axios.post(`${BACKEND_URL}/api/auth/food/`, formData, {
-      withCredentials: true,
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      }
-    })
-    .then((Response)=>{
-      
-      navigate(`/partner/profile/${partner._id}`); // Redirect to partner profile
-      toast.success("Reel Uploaded Successfully")
-    })
-    .catch((err)=>{
-      console.log(err)
-      toast.error("Error in Uploading Reel")
-    })
-
+  
       // Reset form 
       setVideoFile(null);
       setVideoUrl(null);

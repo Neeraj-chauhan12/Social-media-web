@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import pic from '../../public/logo.jpg'
 import BottomNavigation from '../components/BottomNavigation';
-import { BACKEND_URL } from '../utiles/utiles';
+
 
 
 const Profile = () => {
@@ -14,17 +14,17 @@ const Profile = () => {
   const [vedios,setVedios]=useState([])
 
 
-  useEffect(() => {
-    axios.get(`${BACKEND_URL}/api/auth/partner/${id}`, {
-      withCredentials: true
-    }).then(res => {
-      setProfileId(res.data.foodPartner);
-      setVedios(res.data.foodPartner.foodItems);
-    }).catch(err => {
-      console.error(err);
-    });
+  // useEffect(() => {
+  //   axios.get(`${BACKEND_URL}/api/auth/partner/${id}`, {
+  //     withCredentials: true
+  //   }).then(res => {
+  //     setProfileId(res.data.foodPartner);
+  //     setVedios(res.data.foodPartner.foodItems);
+  //   }).catch(err => {
+  //     console.error(err);
+  //   });
 
-  },[id])
+  // },[id])
     // Fetch food partner data from API
     
   return (

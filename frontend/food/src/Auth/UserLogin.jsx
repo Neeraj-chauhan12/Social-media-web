@@ -1,33 +1,34 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import axios from 'axios';
 import toast from 'react-hot-toast';
-import { BACKEND_URL } from '../utiles/utiles';
+import { useLoginMutation } from '../features/api/AuthApi';
+
 
 const UserLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
+  const [login, { isLoading }] = useLoginMutation();
   const handleSubmit = async (e) => {
     e.preventDefault();
     setEmail("");
     setPassword("");
-    // Replace with API call
-    const newUser = { email, password };
-    try {
-      const response = await axios.post(`${BACKEND_URL}/api/auth/user/login`, newUser,{
-        withCredentials:true
-      });
+
+   try {
+    const result = await login({ email, password }).unwrap();
+    toast.success(result?.message || "Login successful!");
+    navigate("/");
+    setEmail("");
+    setPassword("");
     
-      toast.success(response.data.message);
-      localStorage.setItem("user", JSON.stringify(response.data.user));
-     // localStorage.setItem("authToken", token);
-      navigate("/"); // Redirect to home or dashboard
-    } catch (error) {
-      console.error("User Login Error:", error);
-      toast.error(error.response?.data?.message || "Login failed. Please check your credentials.");
-    }
+   } catch (error) {
+    toast.error(error?.data?.message || "Login failed. Please try again.");
+    
+   }
+
+
+   
   };
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 transition-colors duration-300">

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import toast from 'react-hot-toast';
-import { BACKEND_URL } from '../utiles/utiles';
+
 
 
 const FoodPartnerRegister = () => {
@@ -24,23 +24,10 @@ const FoodPartnerRegister = () => {
     setPhone("")
     setAddress("")
 
-    const newPartner = { fullName, email, password, contactName, phone, address };
+    
     
 
-    try {
-      const response = await axios.post(`${BACKEND_URL}/api/auth/partner/register`, newPartner,{
-        withCredentials:true
-
-      });
-     
-      toast.success(response.data.message);
-      navigate("/Create") // Redirect to login after successful registration
-    } catch (error) {
-      console.error("Food Partner Register Error:", error);
-      toast.error(error.response?.data?.message || "Registration failed. Please try again.");
-    }
-
-    // Replace with API call
+   
   }
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 transition-colors duration-300">

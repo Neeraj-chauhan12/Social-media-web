@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import toast from 'react-hot-toast';
-import { BACKEND_URL } from '../utiles/utiles';
+
 
 const UserRegister = () => {
   const [fullName, setFullName] = useState("");
@@ -16,19 +16,10 @@ const UserRegister = () => {
     setEmail("")
     setPassword("")
     // Replace with API call
-    const newUser = { fullName, email, password };
+    
     
 
-    try {
-      const response = await axios.post(`${BACKEND_URL}/api/auth/user/register`, newUser,{
-        withCredentials:true
-      });
-      toast.success(response.data.message);
-      navigate("/"); // Redirect to login after successful registration
-    } catch (error) {
-      console.error("User Register Error:", error);
-      toast.error(error.response?.data?.message || "Registration failed. Please try again.");
-    }
+  
   };
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 transition-colors duration-300">

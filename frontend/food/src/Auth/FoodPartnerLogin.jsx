@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import toast from 'react-hot-toast';
-import { BACKEND_URL } from '../utiles/utiles';
+
 
 
 
@@ -22,18 +22,7 @@ const FoodPartnerLogin = () => {
     const newPartner = { email, password };
     console.log("Food Partner Login:", newPartner);
 
-    try {
-      const response = await axios.post(`${BACKEND_URL}/api/auth/partner/login`, newPartner,{
-        withCredentials:true
-      });
-    
-      toast.success(response.data.message);
-      localStorage.setItem("partner", JSON.stringify(response.data.foodPartner));
-      navigate("/") // Redirect to home after partner login
-    } catch (error) {
-      console.error("Food Partner Login Error:", error);
-      toast.error(error.response?.data?.message || "Login failed. Please check your credentials.");
-    }
+  
 
   };
   return (
