@@ -4,11 +4,12 @@ import UserRegister from "./Auth/UserRegister";
 import UserLogin from "./Auth/UserLogin";
 
 import { Toaster } from "react-hot-toast";
-import SavedReel from "./components/SavedReel"
+import SavedReel from "./components/SavedReel";
 import Home from "./Pages/Home";
 import CreateReel from "./Pages/CreateReel";
-import PartnerProfile from "./Pages/PartnerProfile";
+
 import Profile from "./Pages/Profile";
+import Protect from "./Auth/Protect";
 
 // Check if user has authentication token
 
@@ -19,7 +20,9 @@ const App = () => {
         <Route path="/register" element={<UserRegister />} />
 
         <Route path="/login" element={<UserLogin />} />
-        <Route path="/" element={<Home />} />
+        <Route element={<Protect />}>
+          <Route path="/" element={<Home />} />
+        </Route>
 
         <Route path="/create-reel" element={<CreateReel />} />
         <Route path="/profile" element={<Profile />} />

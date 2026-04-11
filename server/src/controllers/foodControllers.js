@@ -43,7 +43,7 @@ exports.likedReel=async(req,res)=>{
 
     const like= await likeModel.create({
         user: user._id,
-        food: foodId,
+        reel: reelId,
     })
     await ReelModel.findByIdAndUpdate(reelId,
         {$inc:{likeCount:1}}
@@ -80,7 +80,7 @@ exports.getSaveReels=async(req,res)=>{
     const user=req.user;
     const savedReels=await savedModel.find({user:user._id}).populate('reel')
     if(!savedReels || savedReels.length===0){
-        return res.status(404).json({message:"No saved reel items found"})
+        return res.status(200).json({message:"No saved reel items found", savedReels: []})
     }
     res.status(200).json({message:"Saved reel items retrieved successfully", savedReels})
 }
