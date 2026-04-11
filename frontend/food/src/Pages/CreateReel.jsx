@@ -35,7 +35,6 @@ const CreateReel = () => {
 
     try {
       const response = await createReel(formData).unwrap();
-      console.log("Reel created successfully:", response);
       toast.success(response?.message || "Reel uploaded successfully!");
       navigate("/");
     } catch (error) {

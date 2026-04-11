@@ -36,7 +36,7 @@ const handlelikes = async (video) => {
 
   try {
      const response = await likeReels(video._id).unwrap();
-        console.log("like response",response);
+      
         const isLiked = Boolean(response?.data?.like);
         const currentCount = video.likeCount ?? video.likesCount ?? 0;
         const nextCount = isLiked ? currentCount + 1 : Math.max(currentCount - 1, 0);
@@ -59,18 +59,18 @@ const handlelikes = async (video) => {
 
 const handlesaves= async (item) =>{
     const response = await saveReels(item._id).unwrap();
-    console.log("save response",response);
+    
 
  
   if (response.data.newSaved) {
-    console.log("Video saved");
+    
     setVideos((prev) =>
       prev.map((v) =>
         v._id === item._id ? { ...v, saveCount: (v.saveCount ?? 0) + 1 } : v,
       ),
     );
   } else {
-    console.log("Video unsaved");
+    
     setVideos((prev) =>
       prev.map((v) =>
         v._id === item._id ? { ...v, saveCount: Math.max((v.saveCount ?? 0) - 1, 0) } : v,

@@ -12,7 +12,7 @@ const ReelsPart = ({
   onSave,
   emptyMessage = "no yet reel",
 }) => {
-  console.log("vedeos in reels part:", videos);
+  
 
   const videoRefs = useRef(new Map());
   useEffect(() => {
