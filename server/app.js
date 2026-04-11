@@ -12,7 +12,7 @@ const path = require("path");
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://social-media-web-wqqx.onrender.com",
     credentials: true,
     methods: ["GET", "POST", "UPDATE", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],

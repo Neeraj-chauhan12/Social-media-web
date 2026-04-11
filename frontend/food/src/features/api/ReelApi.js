@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 
-const baseUrl = "http://localhost:3000/api/auth/reel";
+const baseUrl = "https://social-media-web-wqqx.onrender.com/api/auth/reel";
 
 export const reelApi = createApi({
   reducerPath: "reelApi",
