@@ -2,6 +2,7 @@ import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { FaRegBookmark } from "react-icons/fa";
 import { IoHome, IoPerson } from "react-icons/io5";
+import { useGetReelsByUserQuery } from '../features/api/ReelApi';
 
 const BottomNavigation = () => {
   const navigate = useNavigate()
@@ -9,6 +10,8 @@ const BottomNavigation = () => {
   const handleProfileClick = () => {
    
     navigate('/profile');
+
+
  
   }
 

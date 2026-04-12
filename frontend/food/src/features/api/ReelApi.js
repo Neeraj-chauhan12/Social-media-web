@@ -1,7 +1,10 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 
-const baseUrl = "https://social-media-web-wqqx.onrender.com/api/auth/reel";
+  const baseUrl = "https://social-media-web-wqqx.onrender.com/api/auth/reel";
+//  const baseUrl="http://localhost:3000/api/auth/reel"
+
+
 
 export const reelApi = createApi({
   reducerPath: "reelApi",
@@ -22,6 +25,21 @@ export const reelApi = createApi({
           : [{ type: "Reels", id: "LIST" }],
     }),
 
+
+    getReelsByUser: builder.query({
+      query: () => ({
+        url: "/user",
+        method: "GET",
+      }),
+      providesTags: (result) =>
+        result?.reelItems
+          ? [
+              ...result.reelItems.map(({ _id }) => ({ type: "Reels", id: _id })),
+              { type: "Reels", id: "LIST" },
+            ]
+          : [{ type: "Reels", id: "LIST" }],
+      refetchOnMountOrArgChange: true,
+    }),
 
 
     CreateReel: builder.mutation({
@@ -79,4 +97,4 @@ export const reelApi = createApi({
   })
 });
 
-export const { useGetReelsQuery,useLikeReelsMutation, useCreateReelMutation,useSaveReelsMutation,useGetSaveReelsQuery, } = reelApi;
+export const { useGetReelsQuery,useLikeReelsMutation,useGetReelsByUserQuery,useCreateReelMutation,useSaveReelsMutation,useGetSaveReelsQuery, } = reelApi;

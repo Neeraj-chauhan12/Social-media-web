@@ -3,17 +3,37 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import pic from "../../public/logo.jpg";
 import BottomNavigation from "../components/BottomNavigation";
-import { useGetReelsQuery } from "../features/api/ReelApi";
+import { useGetReelsByUserQuery,} from "../features/api/ReelApi";
 import { useGetProfileQuery } from "../features/api/AuthApi";
 import { UserLogout } from "../features/AuthSlice";
 import toast from "react-hot-toast";
 
 const Profile = () => {
   const [vedios, setVedios] = useState([]);
-  const { data: reels } = useGetReelsQuery();
-  const { data: profile } = useGetProfileQuery();
+  const { data: reelsByUser, error: reelsError } = useGetReelsByUserQuery(undefined, {
+    refetchOnMountOrArgChange: true,
+  });
+  const { data: profile, error: profileError } = useGetProfileQuery(undefined, {
+    refetchOnMountOrArgChange: true,
+  });
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+   useEffect(() => {
+    setVedios(reelsByUser?.reelItems || []);
+  }, [reelsByUser]);
+
+  if (profileError) {
+    console.error("Profile fetch error:", profileError);
+  }
+
+  if (reelsError) {
+    console.error("ReelsByUser fetch error:", reelsError);
+  }
+
+  console.log("profile data:", profile);
+  console.log("user reels data:", vedios); // Debugging log to check the profile data structure
+  console.log("user reels data:", reelsByUser); // Debugging log to check the data structure
 
   const handleLogout = () => {
     dispatch(UserLogout());
@@ -21,9 +41,8 @@ const Profile = () => {
     navigate("/login");
   };
 
-  useEffect(() => {
-    setVedios(reels?.reelItems || []);
-  }, [reels]);
+ 
+  
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex flex-col pb-32">

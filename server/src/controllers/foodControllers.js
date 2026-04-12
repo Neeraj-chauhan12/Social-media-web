@@ -15,7 +15,7 @@ exports.createReel=async(req,res)=>{
         userId:req.user._id
 
     })
-    res.status(201).json({message:"food created succuffully",reelItem})
+    res.status(201).json({message:"Reel created succuffully",reelItem})
 
 }
 
@@ -25,6 +25,23 @@ exports.getReelData=async(req,res)=>{
     res.status(200).json({message:"Reel items retrieved successfully", reelItems})
 }
 
+
+exports.getReelByIdUser=async(req,res)=>{
+  try {
+    const userId=req.user._id
+    console.log("User ID:", userId); // Debugging log to check the user ID
+    const totalReels=await ReelModel.countDocuments({userId})
+    const reelItems=await ReelModel.find({userId})
+    res.status(200).json({message:"Reel items retrieved successfully", totalReels, reelItems})
+    
+  } catch (error) {
+    
+    res.status(500).json({error:"Error retrieving reel items for the user", error})
+  }
+    
+  
+}
+   
 
 exports.likedReel=async(req,res)=>{
     const { reelId }=req.body;

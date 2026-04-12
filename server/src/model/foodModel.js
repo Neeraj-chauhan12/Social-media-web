@@ -19,6 +19,10 @@ const reelSchema= new mongoose.Schema({
      type:mongoose.Schema.Types.ObjectId,
      ref:"User"
     },
+    totalReels:{
+        type:Number,
+        default:0
+    },
     likeCount:{
         type:Number,
         default:0
