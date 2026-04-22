@@ -4,7 +4,7 @@ const cors = require("cors");
 
 const userRouter = require("./src/routers/userRouter");
 
-const foodRouter = require("./src/routers/foodRouter");
+const foodRouter = require("./src/routers/reelRouter");
 const cookieParser = require("cookie-parser");
 const dbConnection = require("./src/db/dbconnection");
 const app = express();

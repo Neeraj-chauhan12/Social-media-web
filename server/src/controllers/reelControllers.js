@@ -1,4 +1,4 @@
-const ReelModel=require('../model/foodModel')
+const ReelModel=require('../model/reelModel')
 const storageService=require('../services/service')
 const likeModel=require('../model/likesModel')
 const savedModel=require('../model/saveModel')

@@ -1,5 +1,5 @@
 const express = require('express')
-const {getReelData, createReel, likedReel, savedReel, getSaveReels, getReelByIdUser } = require('../controllers/foodControllers')
+const {getReelData, createReel, likedReel, savedReel, getSaveReels, getReelByIdUser } = require('../controllers/reelControllers')
 const router=express.Router()
 const multer=require('multer')
 const userAuthMiddleware = require('../middlewares/userAuthMiddleware')
