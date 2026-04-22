@@ -10,9 +10,7 @@ import toast from "react-hot-toast";
 
 const Profile = () => {
   const [vedios, setVedios] = useState([]);
-  const { data: reelsByUser, error: reelsError } = useGetReelsByUserQuery(undefined, {
-    refetchOnMountOrArgChange: true,
-  });
+ const { data: reelsByUser } = useGetReelsByUserQuery();
   const { data: profile, error: profileError } = useGetProfileQuery(undefined, {
     refetchOnMountOrArgChange: true,
   });
@@ -23,17 +21,9 @@ const Profile = () => {
     setVedios(reelsByUser?.reelItems || []);
   }, [reelsByUser]);
 
-  if (profileError) {
-    console.error("Profile fetch error:", profileError);
-  }
+ 
 
-  if (reelsError) {
-    console.error("ReelsByUser fetch error:", reelsError);
-  }
-
-  console.log("profile data:", profile);
-  console.log("user reels data:", vedios); // Debugging log to check the profile data structure
-  console.log("user reels data:", reelsByUser); // Debugging log to check the data structure
+ 
 
   const handleLogout = () => {
     dispatch(UserLogout());
@@ -91,7 +81,7 @@ const Profile = () => {
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
                 <div className="bg-white/10 backdrop-blur-sm rounded-xl px-4 py-3 border border-white/20 hover:border-blue-400/50 transition-all">
                   <p className="text-blue-200 text-xs font-medium uppercase">Reels Created</p>
-                  <p className="text-white text-2xl font-bold mt-1">{vedios?.length || 0}</p>
+                  <p className="text-white text-2xl font-bold mt-1">{profile?.user?.totalReels || 0}</p>
                 </div>
                 <div className="bg-white/10 backdrop-blur-sm rounded-xl px-4 py-3 border border-white/20 hover:border-purple-400/50 transition-all">
                   <p className="text-purple-200 text-xs font-medium uppercase">Total Views</p>

@@ -16,11 +16,13 @@ const userSchema=new mongoose.Schema({
         type:String,
         required:true
     },
-    totalVedioCreated:{
+    totalReels:{
         type :Number,
         default:0,
-    }
-
+    },
+    
+    
+    
    
 
 },

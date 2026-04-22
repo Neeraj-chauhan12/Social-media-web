@@ -1,4 +1,5 @@
 const UserModel=require('../model/usermodel')
+const ReelModel=require('../model/reelModel')
 const bcrypt=require('bcrypt')
 const jwt=require('jsonwebtoken')
 
@@ -78,7 +79,11 @@ exports.UserLogout=async(req,res)=>{
 
 exports.UserProfile=async(req,res)=>{
     try {
+    
         const user=await UserModel.findById(req.user.id).select("-password")
+        const totalReels=await ReelModel.countDocuments({userId:req.user._id})  
+        user.totalReels=totalReels;
+        
         
         res.status(200).json({message:"user profile",user})
     } catch (error) {
