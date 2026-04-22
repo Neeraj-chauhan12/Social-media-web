@@ -33,60 +33,40 @@ const Home = () => {
 
 
 const handlelikes = async (video) => {
-
   try {
-     const response = await likeReels(video._id).unwrap();
-      
-        const isLiked = Boolean(response?.data?.like);
-        const currentCount = video.likeCount ?? video.likesCount ?? 0;
-        const nextCount = isLiked ? currentCount + 1 : Math.max(currentCount - 1, 0);
-
-        setVideos((prev) =>
-          prev.map((v) =>
-            v._id === video._id ? { ...v, likeCount: nextCount } : v,
-          ),
-        );
-
-        // Keep UI synced with backend after mutation
-        await refetch();
-      } catch (error) {
-        console.error("Error liking video:", error);
-        toast.error("Failed to like video. Please try again.");
-      }
-       
-  
+    // Call the like API
+    await likeReels(video._id).unwrap();
+    
+    // Just refetch to get the actual count from backend
+    await refetch();
+  } catch (error) {
+    console.error("Error liking video:", error);
+    toast.error("Failed to like video. Please try again.");
+  }
 }
 
-const handlesaves= async (item) =>{
-    const response = await saveReels(item._id).unwrap();
+const handlesaves = async (item) => {
+  try {
+    // Call the save API
+    await saveReels(item._id).unwrap();
     
-
- 
-  if (response.data.newSaved) {
-    
-    setVideos((prev) =>
-      prev.map((v) =>
-        v._id === item._id ? { ...v, saveCount: (v.saveCount ?? 0) + 1 } : v,
-      ),
-    );
-  } else {
-    
-    setVideos((prev) =>
-      prev.map((v) =>
-        v._id === item._id ? { ...v, saveCount: Math.max((v.saveCount ?? 0) - 1, 0) } : v,
-      ),
-    );
+    // Just refetch to get the actual count from backend
+    await refetch();
+  } catch (error) {
+    console.error("Error saving video:", error);
+    toast.error("Failed to save video. Please try again.");
   }
-
-  await refetch();
 }
 
   return (
-    
-    
-        <ReelsPart videos={videos} isLoading={isLoading} onLike={handlelikes} onSave={handlesaves} emptyMessage="No Reels Yet!" />
-
-            );
-          }
+    <ReelsPart 
+      videos={videos} 
+      isLoading={isLoading} 
+      onLike={handlelikes} 
+      onSave={handlesaves} 
+      emptyMessage="No Reels Yet!" 
+    />
+  );
+}
 
 export default Home

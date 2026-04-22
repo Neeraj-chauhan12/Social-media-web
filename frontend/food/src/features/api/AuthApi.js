@@ -1,8 +1,8 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { UserLogin } from "../AuthSlice";
 
- const baseUrl = "https://social-media-web-wqqx.onrender.com/api/auth";
-//const baseUrl="http://localhost:3000/api/auth"
+ //const baseUrl = "https://social-media-web-wqqx.onrender.com/api/auth";
+const baseUrl="http://localhost:3000/api/auth"
 
 export const authApi = createApi({
   reducerPath: "authApi",

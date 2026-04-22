@@ -21,8 +21,21 @@ exports.createReel=async(req,res)=>{
 
 
 exports.getReelData=async(req,res)=>{
-    const reelItems=await ReelModel.find({})
-    res.status(200).json({message:"Reel items retrieved successfully", reelItems})
+    const userId = req.user._id;
+    
+    const reelItems=await ReelModel.find({}).lean();
+    
+    // Check which reels are liked by current user
+    const likedReels = await likeModel.find({ user: userId }).select('reel');
+    const likedReelIds = new Set(likedReels.map(l => l.reel.toString()));
+    
+    // Add isLiked field to each reel
+    const reelsWithLikeStatus = reelItems.map(reel => ({
+        ...reel,
+        isLiked: likedReelIds.has(reel._id.toString())
+    }));
+    
+    res.status(200).json({message:"Reel items retrieved successfully", reelItems: reelsWithLikeStatus})
 }
 
 

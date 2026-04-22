@@ -16,6 +16,10 @@ const userSchema=new mongoose.Schema({
         type:String,
         required:true
     },
+    totalVedioCreated:{
+        type :Number,
+        default:0,
+    }
 
    
 
