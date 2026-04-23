@@ -1,10 +1,11 @@
-import React, { useRef } from "react";
-import { FaRegHeart, FaHeart } from "react-icons/fa";
+import React, { useRef, useState, useEffect } from "react";
+import { FaRegHeart, FaHeart, FaVolumeMute, FaVolumeUp } from "react-icons/fa";
 import { FaRegCommentDots, FaRegBookmark } from "react-icons/fa";
 import BottomNavigation from "./BottomNavigation";
 
 const ReelsPart = ({ videos = [], onLike, onSave, emptyMessage = "No reels yet" }) => {
   const containerRef = useRef(null);
+  const [soundEnabledVideoId, setSoundEnabledVideoId] = useState(null);
 
   const handleLike = (video) => {
     if (onLike) onLike(video);
@@ -26,6 +27,21 @@ const ReelsPart = ({ videos = [], onLike, onSave, emptyMessage = "No reels yet" 
       }
     });
   };
+
+  const toggleSound = (reelId) => {
+    setSoundEnabledVideoId((prevId) => (prevId === reelId ? null : reelId));
+  };
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+    containerRef.current.querySelectorAll("video").forEach((video) => {
+      const reelId = video.dataset.reelId;
+      video.muted = soundEnabledVideoId !== reelId;
+      if (soundEnabledVideoId === reelId) {
+        video.play().catch(() => {});
+      }
+    });
+  }, [soundEnabledVideoId, videos]);
 
   if (videos.length === 0) {
     return (
@@ -52,15 +68,30 @@ const ReelsPart = ({ videos = [], onLike, onSave, emptyMessage = "No reels yet" 
           >
             <video
               src={video.video}
+              data-reel-id={String(video._id || idx)}
               autoPlay
               loop
-              muted
+              muted={soundEnabledVideoId == String(video._id || idx)}
               playsInline
               className="h-full w-full object-cover"
             />
             
             {/* Right side icons */}
             <div className="absolute right-4 bottom-32 flex flex-col gap-4 items-center z-20">
+              <button
+                onClick={() => toggleSound(String(video._id || idx))}
+                className="bg-black/60 rounded-full p-2"
+              >
+                {soundEnabledVideoId === String(video._id || idx) ? (
+                  <FaVolumeUp className="w-6 h-6 text-white" />
+                ) : (
+                  <FaVolumeMute className="w-6 h-6 text-white" />
+                )}
+              </button>
+              <span className="text-white text-xs">
+                {soundEnabledVideoId === String(video._id || idx) ? "Sound On" : "Muted"}
+              </span>
+
               {/* Like Button - Red when liked, gray when not */}
               <button
                 onClick={() => handleLike(video)}
