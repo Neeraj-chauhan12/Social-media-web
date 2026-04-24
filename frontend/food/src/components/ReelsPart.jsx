@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import { FaRegHeart, FaHeart, FaVolumeMute, FaVolumeUp } from "react-icons/fa";
 import { FaRegCommentDots, FaRegBookmark } from "react-icons/fa";
 import BottomNavigation from "./BottomNavigation";
+import { Navigate } from "react-router-dom";
 
 const ReelsPart = ({ videos = [], onLike, onSave, emptyMessage = "No reels yet" }) => {
   const containerRef = useRef(null);
@@ -45,8 +46,17 @@ const ReelsPart = ({ videos = [], onLike, onSave, emptyMessage = "No reels yet" 
 
   if (videos.length === 0) {
     return (
+
       <div className="h-screen w-screen flex items-center justify-center bg-black text-white text-xl">
-        {emptyMessage}
+        <div>
+          <button onClick={Navigate(-1)} className="bg-gray-600 text-2xl py-2 px-5 border-gray-400 text-white">back</button>
+        </div>
+        <div>
+            {emptyMessage}
+
+        </div>
+      
+      
       </div>
     );
   }
