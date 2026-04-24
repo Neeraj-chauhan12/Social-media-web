@@ -49,7 +49,7 @@ const ReelsPart = ({ videos = [], onLike, onSave, emptyMessage = "No reels yet" 
 
       <div className="h-screen w-screen flex items-center justify-center bg-black text-white text-xl">
         <div>
-          <button onClick={Navigate(-1)} className="bg-gray-600 text-2xl py-2 px-5 border-gray-400 text-white">back</button>
+          <button onClick={() => window.history.back()}  className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 absolute top-2 right-5 text-2xl py-2 px-4 rounded-md border border-gray-700 hover:bg-gray-700  ">back</button>
         </div>
         <div>
             {emptyMessage}
